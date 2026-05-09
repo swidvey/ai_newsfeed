@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI Newsfeed</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">AI</span>
+        <div>
+          <h1>Newsfeed</h1>
+          <p>Daily AI reading desk</p>
+        </div>
+      </div>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Your Topics</h2>
+          <button class="icon-button" id="resetProfile" title="Reset topics" aria-label="Reset topics">
+            <span aria-hidden="true">R</span>
+          </button>
+        </div>
+        <label for="interests">Interests</label>
+        <textarea id="interests" rows="7" spellcheck="false"></textarea>
+        <label for="blockedTerms">Skip terms</label>
+        <textarea id="blockedTerms" rows="3" spellcheck="false"></textarea>
+        <button class="primary" id="refreshFeed">Refresh Digest</button>
+      </section>
+
+      <section class="panel compact">
+        <h2>Agent Logic</h2>
+        <p>Fetches trusted feeds, removes duplicates, scores by your profile, groups by topic, and explains each pick.</p>
+      </section>
+    </aside>
+
+    <main class="app">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Personal AI brief</p>
+          <h2 id="briefTitle">Today</h2>
+        </div>
+        <div class="status">
+          <span id="sourceCount">0 sources</span>
+          <span id="updatedAt">Not loaded</span>
+        </div>
+      </header>
+
+      <nav class="topic-tabs" id="topicTabs" aria-label="Topic filters"></nav>
+
+      <section class="digest-grid" id="digestGrid" aria-live="polite">
+        <div class="empty-state">
+          <div class="loader"></div>
+          <p>Building your AI digest...</p>
+        </div>
+      </section>
+      <section class="source-errors" id="sourceErrors" hidden></section>
+    </main>
+
+    <template id="articleTemplate">
+      <article class="article-card">
+        <div class="article-meta">
+          <span class="topic"></span>
+          <span class="score"></span>
+        </div>
+        <h3></h3>
+        <p class="digest"></p>
+        <p class="why"></p>
+        <div class="article-footer">
+          <span class="source"></span>
+          <a target="_blank" rel="noreferrer">Read</a>
+        </div>
+      </article>
+    </template>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>
