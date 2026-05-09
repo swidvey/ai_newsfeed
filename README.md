@@ -155,4 +155,4 @@ http://localhost:4174
 
 ## License
 
-No license has been selected yet.
+This project is licensed under the MIT License. See `LICENSE` for details.
