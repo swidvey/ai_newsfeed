@@ -1,16 +1,48 @@
 :root {
   --bg: #f7f5ef;
   --panel: #ffffff;
+  --panel-soft: #fbfaf6;
+  --control: #ffffff;
+  --field: #fbfcfb;
+  --empty: rgba(255, 255, 255, 0.58);
   --ink: #1d2320;
   --muted: #65706a;
   --line: #d9ded8;
   --accent: #0f766e;
   --accent-dark: #0b4f49;
+  --accent-soft: #edf3f1;
   --gold: #b7791f;
   --blue: #2563eb;
   --rose: #be3455;
+  --error-bg: #fff7f8;
+  --error-border: #e9c7cf;
+  --error-ink: #7c2638;
+  --shadow: rgba(25, 36, 31, 0.08);
   color-scheme: light;
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+[data-theme="dark"] {
+  --bg: #101412;
+  --panel: #171d1a;
+  --panel-soft: #111713;
+  --control: #1d2521;
+  --field: #101613;
+  --empty: rgba(23, 29, 26, 0.78);
+  --ink: #eef5f0;
+  --muted: #a5b3aa;
+  --line: #2d3a34;
+  --accent: #2dd4bf;
+  --accent-dark: #5eead4;
+  --accent-soft: #17312c;
+  --gold: #f0b84f;
+  --blue: #8ab4ff;
+  --rose: #fb7185;
+  --error-bg: #2a151a;
+  --error-border: #68303b;
+  --error-ink: #fecdd3;
+  --shadow: rgba(0, 0, 0, 0.24);
+  color-scheme: dark;
 }
 
 * {
@@ -36,7 +68,7 @@ a {
   min-height: 100vh;
   padding: 24px;
   border-right: 1px solid var(--line);
-  background: #fbfaf6;
+  background: var(--panel-soft);
 }
 
 .brand {
@@ -53,7 +85,7 @@ a {
   place-items: center;
   border-radius: 8px;
   background: var(--ink);
-  color: #fff;
+  color: var(--bg);
   font-weight: 800;
 }
 
@@ -123,7 +155,7 @@ textarea {
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 11px;
-  background: #fbfcfb;
+  background: var(--field);
   color: var(--ink);
   line-height: 1.45;
 }
@@ -152,15 +184,42 @@ button {
 
 .primary:hover {
   background: var(--accent-dark);
+  color: var(--bg);
 }
 
-.icon-button {
+.icon-button,
+.theme-toggle {
   width: 36px;
   height: 36px;
   border-radius: 8px;
-  background: #edf3f1;
+  background: var(--accent-soft);
   color: var(--accent-dark);
   font-size: 1.1rem;
+}
+
+.theme-toggle {
+  width: auto;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 11px;
+  border: 1px solid var(--line);
+  background: var(--control);
+  color: var(--ink);
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+.theme-icon {
+  display: grid;
+  width: 20px;
+  height: 20px;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  font-size: 0.75rem;
 }
 
 .app {
@@ -169,25 +228,33 @@ button {
 }
 
 .topbar {
+  align-items: flex-start;
   margin-bottom: 22px;
+}
+
+.topbar > div:first-child {
+  flex: 1 1 auto;
+  min-width: 0;
 }
 
 .topbar h2 {
   margin-top: 4px;
-  font-size: clamp(1.8rem, 4vw, 3rem);
+  font-size: 2.6rem;
   letter-spacing: 0;
 }
 
 .status {
+  flex: 0 0 auto;
   flex-wrap: wrap;
   justify-content: flex-end;
+  max-width: 320px;
 }
 
 .status span {
   padding: 8px 10px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #fff;
+  background: var(--control);
 }
 
 .topic-tabs {
@@ -202,7 +269,7 @@ button {
   padding: 0 13px;
   border: 1px solid var(--line);
   border-radius: 8px;
-  background: #fff;
+  background: var(--control);
   color: var(--muted);
   font-weight: 800;
 }
@@ -230,8 +297,8 @@ button {
 }
 
 .article-card:hover {
-  border-color: #b7c6bf;
-  box-shadow: 0 10px 26px rgba(25, 36, 31, 0.08);
+  border-color: var(--muted);
+  box-shadow: 0 10px 26px var(--shadow);
 }
 
 .topic {
@@ -289,17 +356,17 @@ button {
   gap: 14px;
   border: 1px dashed var(--line);
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.58);
+  background: var(--empty);
   color: var(--muted);
 }
 
 .source-errors {
   margin-top: 18px;
   padding: 14px 16px;
-  border: 1px solid #e9c7cf;
+  border: 1px solid var(--error-border);
   border-radius: 8px;
-  background: #fff7f8;
-  color: #7c2638;
+  background: var(--error-bg);
+  color: var(--error-ink);
   line-height: 1.5;
 }
 
@@ -342,7 +409,12 @@ button {
     flex-direction: column;
   }
 
+  .topbar h2 {
+    font-size: 2rem;
+  }
+
   .status {
     justify-content: flex-start;
+    max-width: none;
   }
 }

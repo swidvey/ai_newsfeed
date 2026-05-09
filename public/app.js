@@ -21,6 +21,8 @@ const elements = {
   blockedTerms: document.querySelector("#blockedTerms"),
   refreshFeed: document.querySelector("#refreshFeed"),
   resetProfile: document.querySelector("#resetProfile"),
+  themeToggle: document.querySelector("#themeToggle"),
+  themeLabel: document.querySelector("#themeLabel"),
   topicTabs: document.querySelector("#topicTabs"),
   digestGrid: document.querySelector("#digestGrid"),
   sourceErrors: document.querySelector("#sourceErrors"),
@@ -29,6 +31,25 @@ const elements = {
   updatedAt: document.querySelector("#updatedAt"),
   briefTitle: document.querySelector("#briefTitle")
 };
+
+function loadTheme() {
+  const saved = localStorage.getItem("ai-newsfeed-theme");
+  if (saved === "light" || saved === "dark") return saved;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+}
+
+function applyTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  elements.themeToggle.setAttribute("aria-pressed", String(theme === "dark"));
+  elements.themeToggle.title = theme === "dark" ? "Switch to light mode" : "Switch to dark mode";
+  elements.themeLabel.textContent = theme === "dark" ? "Light" : "Dark";
+  elements.themeToggle.querySelector(".theme-icon").textContent = theme === "dark" ? "L" : "D";
+}
+
+function saveTheme(theme) {
+  localStorage.setItem("ai-newsfeed-theme", theme);
+  applyTheme(theme);
+}
 
 function listToText(items) {
   return items.join("\n");
@@ -191,6 +212,11 @@ elements.resetProfile.addEventListener("click", () => {
   saveProfile(DEFAULT_PROFILE);
   refreshDigest();
 });
+elements.themeToggle.addEventListener("click", () => {
+  const current = document.documentElement.dataset.theme === "dark" ? "dark" : "light";
+  saveTheme(current === "dark" ? "light" : "dark");
+});
 
+applyTheme(loadTheme());
 writeProfile(loadProfile());
 refreshDigest();
