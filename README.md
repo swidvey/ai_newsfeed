@@ -39,9 +39,39 @@ source links, and a light/dark mode toggle.
 
 No framework or package install is required for the current version.
 
+## Requirements
+
+- Node.js 20 or newer
+- npm
+
+Check your local versions:
+
+```bash
+node -v
+npm -v
+```
+
+This project has been tested with:
+
+```text
+Node.js v24.15.0
+npm 11.12.1
+```
+
 ## Quick Start
 
-Clone or open the project folder, then run:
+Clone or open the project folder.
+
+If you are using Git Bash on Windows and `node` or `npm` is not found, add
+Node.js to your shell path first:
+
+```bash
+export PATH="$PATH:/c/Program Files/nodejs"
+node -v
+npm -v
+```
+
+Then start the app:
 
 ```bash
 npm start
@@ -54,6 +84,30 @@ http://localhost:4173
 ```
 
 The default port is `4173`.
+
+## Windows PowerShell
+
+If you are using PowerShell instead of Git Bash, you usually do not need the
+`export PATH` command. Start the app with:
+
+```powershell
+npm start
+```
+
+To use a different port in PowerShell:
+
+```powershell
+$env:PORT=4174
+npm start
+```
+
+## Git Bash
+
+To use a different port in Git Bash:
+
+```bash
+PORT=4174 npm start
+```
 
 ## Usage
 
@@ -132,9 +186,17 @@ that respond successfully.
 
 ### The port is already in use
 
-Start the app on another port:
+Start the app on another port.
+
+Git Bash:
 
 ```bash
+PORT=4174 npm start
+```
+
+PowerShell:
+
+```powershell
 $env:PORT=4174
 npm start
 ```
